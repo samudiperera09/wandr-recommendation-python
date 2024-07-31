@@ -18,7 +18,24 @@ def recommend_places(user_categories, user_activities, places):
     recommendations = []
     for place in places:
         place_categories = place.categories
+        # print(place_categories)
         place_activities = place.activities
+        # print(place_activities)
+
+        # if(place_activities != None):
+        #     place_activities = place_activities
+        # else:
+        #     continue
+
+        # if(place_categories != None):
+        #     place_categories = place_categories
+        # else:
+        #     continue
+
+        #if place_activities is null should skip that place and go to next place
+        # if place_activities is None:
+        #     continue
+        
 
         place_category_embeddings = compute_embeddings(place_categories)
         place_activity_embeddings = compute_embeddings(place_activities)
@@ -28,9 +45,9 @@ def recommend_places(user_categories, user_activities, places):
 
         total_similarity = (category_sim + activity_sim) / 2
         recommendations.append({
-            'place_id': place.id,
-            'place_name': place.name,
-            'similarity': total_similarity
+            'placeId': place.id,
+            'placeName': place.name,
+            'similarity': float(total_similarity)
         })
 
     recommendations.sort(key=lambda x: x['similarity'], reverse=True)
