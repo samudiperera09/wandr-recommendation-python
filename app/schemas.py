@@ -1,50 +1,23 @@
-from typing import List, Optional, Generic, TypeVar
-from pydantic import BaseModel , Field
-from pydantic.generics import GenericModel
+from pydantic import BaseModel
+from typing import List
 
-T = TypeVar('T')
+class User(BaseModel):
+    id: int
+    categories: List[str]
+    activities: List[str]
 
-class CategorySchema(BaseModel):
+class Place(BaseModel):
     id: int
     name: str
+    categories: List[str]
+    activities: List[str]
 
-    class Config:
-        orm_mode: True
+class RecommendationRequest(BaseModel):
+    user: User
+    places: List[Place]
 
-class ActivitySchema(BaseModel):
-    id: int
-    name: str
+class RecommendationResponse(BaseModel):
+    place_id: int
+    place_name: str
+    similarity: float
 
-    class Config:
-        orm_mode: True
-
-class TravellerSchema(BaseModel):
-    id: int
-    name: str
-    country: str
-    categories: List[CategorySchema]
-    activities: List[ActivitySchema]
-    
-    class Config:
-        orm_mode: True
-
-
-class Request(GenericModel, Generic[T]):
-    parameter: Optional[T] = Field(...)
-
-
-class RequestTraveller(BaseModel):
-    parameter: TravellerSchema = Field(...)
-
-class RequestCategory(BaseModel):
-    parameter: CategorySchema = Field(...)
-
-class RequestActivity(BaseModel):
-    parameter: ActivitySchema = Field(...)
-
-
-class Response(GenericModel, Generic[T]):
-    code: str
-    status: str
-    message: str
-    result: Optional[T]
