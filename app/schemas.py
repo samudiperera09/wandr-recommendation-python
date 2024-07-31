@@ -17,7 +17,7 @@ class RecommendationRequest(BaseModel):
     places: List[Place]
 
 class RecommendationResponse(BaseModel):
-    place_id: int
-    place_name: str
+    placeId: int
+    placeName: str
     similarity: float
 
