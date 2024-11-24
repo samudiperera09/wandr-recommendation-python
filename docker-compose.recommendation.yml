@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  recommendation-system:
+    image: wandr-recommendation
+    build:
+      context: .
+    ports:
+      - "5001:8000"  # Host port 5000 -> Container port 8000
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    networks:
+      - wandr_network
+
+  wandr-postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: wandr
+      POSTGRES_PASSWORD: wandr
+      POSTGRES_DB: wandr
+    ports:
+      - "5435:5432"  # Host port 5435 -> Container port 5432
+    networks:
+      - wandr_network
+
+networks:
+  wandr_network:
+    driver: bridge

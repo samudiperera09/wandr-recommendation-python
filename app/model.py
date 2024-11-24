@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Integer, JSON, TIMESTAMP, ForeignKey, tex
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
-from config import Base
+from app.config import Base
 
 
 class Category(Base):

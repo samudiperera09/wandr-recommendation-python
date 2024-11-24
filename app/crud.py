@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from model import Traveller, Category, Activities
-from schemas import TravellerSchema, ActivitySchema, CategorySchema
+from app.model import Traveller, Category, Activities
+from app.schemas import TravellerSchema, ActivitySchema, CategorySchema
 
 def get_traveller(db:Session,skip:int=0,limit:int=100):
     return db.query(Traveller).offset(skip).limit(limit).all()

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from typing import List
-from schemas import RecommendationRequest, RecommendationResponse
-from utils.recommend import recommend_places
+from app.schemas import RecommendationRequest, RecommendationResponse
+from app.utils.recommend import recommend_places
 
 router = APIRouter()
 
